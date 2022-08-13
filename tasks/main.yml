@@ -1,2 +1,26 @@
 ---
-# tasks file for howdy
+
+# - name: Add the PPA 
+#   ansible.builtin.apt_key:
+#     url: https://packages.microsoft.com/keys/microsoft.asc
+#     state: present
+
+- name: Install howdy
+  block:
+
+    - name: Add howdy PPA repository
+      ansible.builtin.apt_repository:
+        repo: ppa:boltgolt/howdy
+        state: present
+        filename: howdy
+    
+    - name: Install howdy
+      ansible.builtin.apt:
+        name: howdy
+        update_cache: yes
+        state: present
+
+  rescue:
+    - debug:
+        msg: 'Howdy not yet supported on this OS release...'
+
