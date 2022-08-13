@@ -22,5 +22,5 @@
 
   rescue:
     - name: show rescue debug message
-      debug:
+      ansible.builtin.debug:
         msg: 'Howdy not yet supported on this OS release...'
