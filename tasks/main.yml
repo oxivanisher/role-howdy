@@ -1,5 +1,4 @@
 ---
-
 # - name: Add the PPA
 #   ansible.builtin.apt_key:
 #     url: https://packages.microsoft.com/keys/microsoft.asc
@@ -7,7 +6,6 @@
 
 - name: Install howdy
   block:
-
     - name: Add howdy PPA repository
       ansible.builtin.apt_repository:
         repo: ppa:boltgolt/howdy
@@ -21,6 +19,6 @@
         state: present
 
   rescue:
-    - name: show rescue debug message
+    - name: Show rescue debug message
       ansible.builtin.debug:
-        msg: 'Howdy not yet supported on this OS release...'
+        msg: "Howdy not yet supported on this OS release..."
