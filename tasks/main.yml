@@ -1,22 +1,26 @@
 ---
-# - name: Add the PPA
-#   ansible.builtin.apt_key:
-#     url: https://packages.microsoft.com/keys/microsoft.asc
-#     state: present
-
 - name: Install howdy
   block:
-    - name: Add howdy PPA repository
-      ansible.builtin.apt_repository:
-        repo: ppa:boltgolt/howdy
-        state: present
-        filename: howdy
+    - name: Remove legacy apt file
+      ansible.builtin.file:
+        path: /etc/apt/sources.list.d/boltgolt-ubuntu-howdy-focal.list
+        state: absent
 
-    - name: Install howdy
-      ansible.builtin.apt:
-        name: howdy
-        update_cache: true
+    - name: Remove legacy apt file
+      ansible.builtin.file:
+        path: /etc/apt/howdy.list
+        state: absent
+
+    - name: Add KeepassXC repo using key from URL
+      ansible.builtin.deb822_repository:
+        name: keepassxc-ppa
+        types: [deb, deb-src]
+        uris: https://ppa.launchpadcontent.net/boltgolt/howdy/ubuntu
+        suites: ["{{ ansible_distribution_release|lower }}"]
+        components: [main]
+        signed_by: "https://keyserver.ubuntu.com/pks/lookup?op=get&search=0x2802FD7D4CBF1B050BDE8F3D8CEBC97F3E9E1D58"
         state: present
+        enabled: true
 
   rescue:
     - name: Show rescue debug message
