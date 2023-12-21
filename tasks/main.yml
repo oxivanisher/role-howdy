@@ -8,7 +8,7 @@
 
     - name: Remove legacy apt file
       ansible.builtin.file:
-        path: /etc/apt/howdy.list
+        path: /etc/apt/sources.list.d/howdy.list
         state: absent
 
     - name: Add KeepassXC repo using key from URL
