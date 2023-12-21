@@ -1,16 +1,6 @@
 ---
 - name: Install howdy
   block:
-    - name: Remove legacy apt file
-      ansible.builtin.file:
-        path: /etc/apt/sources.list.d/boltgolt-ubuntu-howdy-focal.list
-        state: absent
-
-    - name: Remove legacy apt file
-      ansible.builtin.file:
-        path: /etc/apt/sources.list.d/howdy.list
-        state: absent
-
     - name: Add KeepassXC repo using key from URL
       ansible.builtin.deb822_repository:
         name: keepassxc-ppa
@@ -21,6 +11,11 @@
         signed_by: "https://keyserver.ubuntu.com/pks/lookup?op=get&search=0x2802FD7D4CBF1B050BDE8F3D8CEBC97F3E9E1D58"
         state: present
         enabled: true
+
+    - name: Install howdy
+      ansible.builtin.apt:
+        name: howdy
+        update_cache: true
 
   rescue:
     - name: Show rescue debug message
