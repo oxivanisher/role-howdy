@@ -3,10 +3,10 @@
   block:
     - name: Add KeepassXC repo using key from URL
       ansible.builtin.deb822_repository:
-        name: keepassxc-ppa
+        name: howdy-ppa
         types: [deb, deb-src]
         uris: https://ppa.launchpadcontent.net/boltgolt/howdy/ubuntu
-        suites: ["{{ ansible_distribution_release|lower }}"]
+        suites: ["{{ ansible_distribution_release | lower }}"]
         components: [main]
         signed_by: "https://keyserver.ubuntu.com/pks/lookup?op=get&search=0x2802FD7D4CBF1B050BDE8F3D8CEBC97F3E9E1D58"
         state: present
