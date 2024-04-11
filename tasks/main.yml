@@ -11,11 +11,15 @@
         signed_by: "https://keyserver.ubuntu.com/pks/lookup?op=get&search=0x2802FD7D4CBF1B050BDE8F3D8CEBC97F3E9E1D58"
         state: present
         enabled: true
+      become: true
+      become_user: root
 
     - name: Install howdy
       ansible.builtin.apt:
         name: howdy
         update_cache: true
+      become: true
+      become_user: root
 
   rescue:
     - name: Show rescue debug message
