@@ -18,6 +18,8 @@
       ansible.builtin.apt:
         name: howdy
         update_cache: true
+      environment:
+        HOWDY_NO_PROMPT: "true"
       become: true
       become_user: root
 
