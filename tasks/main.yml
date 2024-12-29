@@ -1,5 +1,8 @@
 ---
 - name: Install howdy
+  # Since has still no current package, we don't fail all the time.
+  # Howdy needs to use a dedicated venv... https://github.com/boltgolt/howdy/issues
+  when: ansible_distribution_major_version <= "22"
   block:
     - name: Add KeepassXC repo using key from URL
       ansible.builtin.deb822_repository:
