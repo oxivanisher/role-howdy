@@ -1,5 +1,6 @@
 howdy
 =====
+[![Ansible Lint](https://github.com/oxivanisher/role-howdy/actions/workflows/ansible-lint.yml/badge.svg)](https://github.com/oxivanisher/role-howdy/actions/workflows/ansible-lint.yml)
 
 This role installs [howdy](https://github.com/boltgolt/howdy). Please be aware, that the package is installed without being configured. You will have to run `sudo howdy config` to set it up.
 
