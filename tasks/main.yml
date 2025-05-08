@@ -2,6 +2,8 @@
 - name: Install howdy
   # Since has still no current package, we don't fail all the time.
   # Howdy needs to use a dedicated venv... https://github.com/boltgolt/howdy/issues
+
+  # attention, ansible_distribution_release will break on linux mint. check the nextcloud-client role for a possible workaround
   when: ansible_distribution_major_version <= "22"
   block:
     - name: Add KeepassXC repo using key from URL
