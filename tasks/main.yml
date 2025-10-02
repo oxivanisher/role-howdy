@@ -6,6 +6,13 @@
   # attention, ansible_distribution_release will break on linux mint. check the nextcloud-client role for a possible workaround
   when: ansible_distribution_major_version <= "22"
   block:
+    - name: Ensure python3-debian is installed
+      ansible.builtin.package:
+        name: python3-debian
+        state: present
+      become: true
+      become_user: root
+
     - name: Add KeepassXC repo using key from URL
       ansible.builtin.deb822_repository:
         name: howdy-ppa
