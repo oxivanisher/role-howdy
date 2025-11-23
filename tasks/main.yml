@@ -3,8 +3,8 @@
   # Since has still no current package, we don't fail all the time.
   # Howdy needs to use a dedicated venv... https://github.com/boltgolt/howdy/issues
 
-  # attention, ansible_distribution_release will break on linux mint. check the nextcloud-client role for a possible workaround
-  when: ansible_distribution_major_version <= "22"
+  # attention, ansible_facts.distribution_release will break on linux mint. check the nextcloud-client role for a possible workaround
+  when: ansible_facts.distribution_major_version <= "22"
   block:
     - name: Ensure python3-debian is installed
       ansible.builtin.package:
@@ -18,7 +18,7 @@
         name: howdy-ppa
         types: [deb, deb-src]
         uris: https://ppa.launchpadcontent.net/boltgolt/howdy/ubuntu
-        suites: ["{{ ansible_distribution_release | lower }}"]
+        suites: ["{{ ansible_facts.distribution_release | lower }}"]
         components: [main]
         signed_by: "https://keyserver.ubuntu.com/pks/lookup?op=get&search=0x2802FD7D4CBF1B050BDE8F3D8CEBC97F3E9E1D58"
         state: present
